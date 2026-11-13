@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menu Ranieri</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Menu Ranieri Pasticcerie: caffetteria, dolci, cucina, cocktail e cantina.">
+<meta name="theme-color" content="#06111c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=Cinzel:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Layout: copertina blu notte come il menu stampato, poi ogni sezione in una "pagina" bianca con cornice e medaglione in alto */
+:root{
+  --notte:#06111c;        /* fondo copertina */
+  --bronzo:#8b7865;       /* oro/bronzo del logo e della scritta menù */
+  --bronzo-chiaro:#b8a48e;
+  --carta:#ffffff;        /* pagine */
+  --fondo:#eceae6;        /* tra una pagina e l'altra */
+  --inchiostro:#1c1c1c;
+  --grigio:#6b6660;
+  --f-titoli:"Oranienbaum", "Bodoni 72", Didot, Georgia, serif;
+  --f-etichette:"Cinzel", "Trajan Pro", Georgia, serif;
+  --f-testo:"Source Sans 3", "Myriad Pro", system-ui, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{background:var(--notte)}
+body{background:var(--fondo);color:var(--inchiostro);font-family:var(--f-testo);font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--notte)}
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:640px;margin:0 auto}
+.mask{display:block;background:var(--bronzo);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
+
+/* Copertina */
+.cover{background:var(--notte);position:relative;overflow:hidden;padding-block:36px 0}
+.cover .col{position:relative;display:flex;flex-direction:column;align-items:center}
+.cover .logo{width:min(200px,52vw);aspect-ratio:540/332;-webkit-mask-image:url(img/logo.png);mask-image:url(img/logo.png)}
+.cover .mandala{width:min(170px,44vw);aspect-ratio:2/1;margin-top:18px;-webkit-mask-image:url(img/mandala.png);mask-image:url(img/mandala.png);-webkit-mask-size:100% 200%;mask-size:100% 200%;-webkit-mask-position:top;mask-position:top;opacity:.9}
+.cover .word{width:100%;aspect-ratio:800/448;margin-top:22px;margin-bottom:-2px;-webkit-mask-image:url(img/wordmark.png);mask-image:url(img/wordmark.png);-webkit-mask-position:bottom;mask-position:bottom}
+
+/* Barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--notte);border-bottom:1px solid #1d2a37}
+.bar .col{display:flex;flex-direction:column;gap:10px;padding-block:10px}
+.search{width:100%;font:inherit;font-size:16px;padding:9px 12px;border-radius:999px;border:1px solid #2a3846;background:#0e1b28;color:#f2ede6}
+.search::placeholder{color:#8d97a1}
+.search:focus-visible{outline:2px solid var(--bronzo-chiaro);outline-offset:1px}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -4px;padding:0 4px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;font-family:var(--f-etichette);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;border-radius:999px;border:1px solid #33414f;background:transparent;color:#d9d0c5;cursor:pointer;white-space:nowrap}
+.chip[aria-current="true"]{background:var(--bronzo);border-color:var(--bronzo);color:#fff}
+.chip:focus-visible{outline:2px solid var(--bronzo-chiaro);outline-offset:2px}
+
+/* Pagine */
+main{padding-block:14px 30px}
+.pagina{position:relative;background:var(--carta);margin-top:44px;scroll-margin-top:118px;
+  border:22px solid transparent;border-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120' preserveAspectRatio='none'%3E%3Cpath d='M3,19 A16 16 0 0 0 19,3 L101,3 A16 16 0 0 0 117,19 L117,101 A16 16 0 0 0 101,117 L19,117 A16 16 0 0 0 3,101 Z' fill='white' stroke='%231c1c1c' stroke-width='3'/%3E%3Cpath d='M9,26.2 A24 24 0 0 0 26.2,9 L93.8,9 A24 24 0 0 0 111,26.2 L111,93.8 A24 24 0 0 0 93.8,111 L26.2,111 A24 24 0 0 0 9,93.8 Z' fill='none' stroke='%231c1c1c' stroke-width='1.1'/%3E%3C/svg%3E") 40 fill stretch;
+  padding:18px 6px 8px}
+.pagina:first-child{margin-top:34px}
+.medaglione{position:absolute;left:50%;top:-52px;transform:translateX(-50%);width:62px;height:56px;background:var(--carta);border-radius:50%;display:grid;place-items:center}
+.medaglione i{display:block;width:54px;aspect-ratio:160/141;background:var(--inchiostro);-webkit-mask:url(img/medallion.png) center/contain no-repeat;mask:url(img/medallion.png) center/contain no-repeat}
+.pagina h2{font-family:var(--f-titoli);font-weight:400;font-size:clamp(28px,8vw,36px);text-transform:uppercase;letter-spacing:.01em;line-height:1;margin:6px 0 4px;text-align:center;text-wrap:balance}
+.banner{margin:12px 0 4px;border-radius:2px;overflow:hidden;background:var(--carta)}
+.banner img{display:block;width:100%;max-width:100%;height:190px;object-fit:cover}
+.banner.contain img{object-fit:contain;height:170px}
+
+.grp{margin-top:20px}
+.grp-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-bottom:1px solid var(--inchiostro);padding-bottom:4px;margin-bottom:6px}
+.grp-h h3{font-family:var(--f-titoli);font-weight:400;font-size:22px;text-transform:uppercase;margin:0;line-height:1.05}
+.grp-h .cols{display:flex;font-family:var(--f-titoli);font-size:18px}
+.grp-h .cols span{width:66px;text-align:right}
+ul.voci{list-style:none;margin:0;padding:0}
+.v{display:flex;gap:10px;align-items:center;padding:6px 0}
+.v .foto{flex:none;width:58px;height:66px;object-fit:contain;background:var(--carta)}
+.v .corpo{flex:1;min-width:0}
+.riga{display:flex;align-items:baseline;gap:6px;font-family:var(--f-titoli);font-size:19px;line-height:1.15}
+.riga .nm{min-width:0}
+.riga .pt{flex:1;min-width:12px;border-bottom:1.5px dotted #9a948d;transform:translateY(-4px)}
+.riga .pr{display:flex;white-space:nowrap;font-variant-numeric:tabular-nums}
+.riga .pr span{min-width:66px;text-align:right}
+.doppio .riga .pt{visibility:hidden}
+.doppio .v.unico .riga .pt{visibility:visible}
+.v.unico .riga .pr span{min-width:0}
+.ds{display:block;font-size:13.5px;color:var(--grigio);margin-top:2px;line-height:1.35}
+.extra .riga{font-size:15px;color:var(--grigio)}
+.extra .v{padding:2px 0}
+
+.state{padding:48px 0;color:var(--grigio);text-align:center;font-family:var(--f-titoli);font-size:20px}
+.state button{margin-top:12px;font-family:var(--f-etichette);font-size:12px;letter-spacing:.08em;padding:8px 18px;border-radius:999px;border:1px solid var(--inchiostro);background:var(--carta);color:var(--inchiostro);cursor:pointer}
+.demo{font-size:12px;color:var(--bronzo-chiaro);text-align:center;margin-top:10px}
+
+footer{background:var(--notte);color:var(--bronzo-chiaro);text-align:center;padding-block:34px 40px;position:relative;overflow:hidden}
+footer .mandala-f{width:min(220px,60vw);aspect-ratio:1;margin:0 auto 18px;-webkit-mask-image:url(img/mandala.png);mask-image:url(img/mandala.png)}
+footer .ind{font-family:var(--f-etichette);font-size:12px;letter-spacing:.12em;line-height:1.8;text-transform:uppercase}
+@media (prefers-reduced-motion: no-preference){html{scroll-behavior:smooth}}
+</style>
+
+</head>
+<body>
+<header class="cover gutter">
+  <div class="col">
+    <span class="mask logo" role="img" aria-label="Ranieri Pasticcerie"></span>
+    <span class="mask mandala" aria-hidden="true"></span>
+    <span class="mask word" role="img" aria-label="menù"></span>
+  </div>
+</header>
+
+<div class="bar gutter">
+  <div class="col">
+    <input id="q" class="search" type="search" placeholder="Cerca nel menu (es. spritz, pistacchio)" aria-label="Cerca nel menu" autocomplete="off">
+    <nav id="chips" class="chips" aria-label="Sezioni del menu"></nav>
+    <div id="demo" class="demo" hidden>Anteprima: dati estratti dal PDF. Online voci e prezzi arrivano dal foglio Google.</div>
+  </div>
+</div>
+
+<main class="gutter"><div class="col" id="menu"><div class="state">Caricamento del menu…</div></div></main>
+
+<footer class="gutter">
+  <span class="mask mandala-f" aria-hidden="true"></span>
+  <div class="ind">Via Campana Quarto, 1<br>Marano di Napoli</div>
+</footer>
+
+<script>
+/* ===== CONFIGURAZIONE =====
+   SHEET_ID: l'ID del foglio Google (la parte tra /d/ e /edit nell'indirizzo).
+   Il foglio va condiviso come "Chiunque abbia il link: Visualizzatore".
+   IMG: cartella delle immagini, relativa a questa pagina. */
+const CONFIG = {
+  SHEET_ID: "1nT3oFpnfjzdkJskhhS8-wFzuG7zCdpeH6I8OrC3k06U",
+  SCHEDA_MENU: "Menu",
+  SCHEDA_SEZIONI: "Sezioni",
+  IMG: "img/",
+  COMPATTI: /^aggiunt/i,
+  ETICHETTE_DOPPIO_PREZZO: ["Mattina", "Sera"]
+};
+const DEMO = null;
+
+const num = new Intl.NumberFormat("it-IT", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const eur = {format: n => "€ " + num.format(n)};
+
+function parseCSV(text){
+  const rows = []; let row = [], f = "", q = false;
+  for (let i = 0; i < text.length; i++){
+    const c = text[i];
+    if (q){
+      if (c === '"'){ if (text[i+1] === '"'){ f += '"'; i++; } else q = false; }
+      else f += c;
+    } else if (c === '"') q = true;
+    else if (c === ","){ row.push(f); f = ""; }
+    else if (c === "\n"){ row.push(f); rows.push(row); row = []; f = ""; }
+    else if (c !== "\r") f += c;
+  }
+  if (f !== "" || row.length){ row.push(f); rows.push(row); }
+  return rows;
+}
+
+// Accetta 1.8, "1,80", "€ 1,80", "1.400,00"
+function prezzo(v){
+  if (v === null || v === undefined) return null;
+  if (typeof v === "number") return v;
+  let s = String(v).replace(/[^\d,.\-]/g, "");
+  if (!s) return null;
+  if (s.includes(",")) s = s.replace(/\./g, "").replace(",", ".");
+  const n = parseFloat(s);
+  return isNaN(n) ? null : n;
+}
+
+function colonne(head){
+  const ix = name => head.findIndex(h => String(h).trim().toLowerCase() === name);
+  return ix;
+}
+function toRecords(head, rows){
+  const ix = colonne(head);
+  const c = {sez: ix("sezione"), grp: ix("gruppo"), voce: ix("voce"), desc: ix("descrizione"),
+             p: ix("prezzo"), ps: ix("prezzo_sera"), vis: ix("visibile"), foto: ix("foto")};
+  const g = (r, i) => i >= 0 ? String(r[i] ?? "").trim() : "";
+  return rows.map(r => ({
+    sez: g(r, c.sez), grp: g(r, c.grp), voce: g(r, c.voce), desc: g(r, c.desc),
+    p: prezzo(r[c.p]), ps: c.ps >= 0 ? prezzo(r[c.ps]) : null,
+    vis: c.vis < 0 || g(r, c.vis).toUpperCase() !== "NO", foto: g(r, c.foto)
+  })).filter(x => x.vis && x.voce);
+}
+function toSezioni(head, rows){
+  const ix = colonne(head), s = ix("sezione"), im = ix("immagine"), a = ix("adatta");
+  const m = new Map();
+  for (const r of rows){ const k = String(r[s] ?? "").trim(); if (k) m.set(k, {img: String(r[im] ?? "").trim(), fit: String(r[a] ?? "").trim().toLowerCase()}); }
+  return m;
+}
+
+async function csv(scheda){
+  const url = `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(scheda)}&t=${Date.now()}`;
+  const res = await fetch(url, {cache: "no-store"});
+  if (!res.ok) throw new Error("HTTP " + res.status);
+  const txt = await res.text();
+  if (txt.trim().startsWith("<")) throw new Error("Foglio non condiviso pubblicamente");
+  return parseCSV(txt);
+}
+
+async function carica(){
+  if (CONFIG.SHEET_ID && !CONFIG.SHEET_ID.startsWith("__")){
+    const [menu, sez] = await Promise.all([csv(CONFIG.SCHEDA_MENU), csv(CONFIG.SCHEDA_SEZIONI).catch(() => null)]);
+    const [h, ...r] = menu;
+    let sezioni = new Map();
+    if (sez && sez.length){ const [sh, ...sr] = sez; if (colonne(sh)("sezione") >= 0) sezioni = toSezioni(sh, sr); }
+    return {voci: toRecords(h, r), sezioni};
+  }
+  if (DEMO){
+    document.getElementById("demo").hidden = false;
+    return {voci: toRecords(DEMO.menu.head, DEMO.menu.rows), sezioni: toSezioni(DEMO.sezioni[0], DEMO.sezioni.slice(1))};
+  }
+  throw new Error("SHEET_ID non configurato");
+}
+
+function el(tag, cls, text){ const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+const slug = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const imgSrc = f => /^https?:\/\//.test(f) ? f : CONFIG.IMG + f;
+
+let DATA = {voci: [], sezioni: new Map()};
+function render(filtro = ""){
+  const main = document.getElementById("menu"), chips = document.getElementById("chips");
+  main.textContent = ""; chips.textContent = "";
+  const f = filtro.trim().toLowerCase();
+  const items = f ? DATA.voci.filter(x => (x.voce + " " + x.desc + " " + x.grp + " " + x.sez).toLowerCase().includes(f)) : DATA.voci;
+  if (!items.length){ main.append(el("div", "state", "Nessuna voce trovata.")); return; }
+
+  const sezioni = new Map();
+  for (const x of items){
+    if (!sezioni.has(x.sez)) sezioni.set(x.sez, new Map());
+    const g = sezioni.get(x.sez);
+    if (!g.has(x.grp)) g.set(x.grp, []);
+    g.get(x.grp).push(x);
+  }
+  for (const [sez, gruppi] of sezioni){
+    const id = "s-" + slug(sez);
+    const chip = el("button", "chip", sez); chip.type = "button"; chip.dataset.target = id;
+    chip.addEventListener("click", () => document.getElementById(id).scrollIntoView());
+    chips.append(chip);
+
+    const s = el("section", "pagina"); s.id = id;
+    const med = el("div", "medaglione"); med.append(el("i")); med.setAttribute("aria-hidden", "true"); s.append(med);
+    s.append(el("h2", null, sez));
+    const info = DATA.sezioni.get(sez);
+    if (info && info.img && !f){
+      const b = el("div", "banner" + (info.fit === "contain" ? " contain" : ""));
+      const im = el("img"); im.src = imgSrc(info.img); im.alt = ""; im.loading = "lazy"; im.decoding = "async";
+      im.onerror = () => b.remove();
+      b.append(im); s.append(b);
+    }
+    for (const [grp, voci] of gruppi){
+      const doppio = voci.some(v => v.ps != null);
+      const g = el("div", "grp" + (CONFIG.COMPATTI.test(grp) ? " extra" : "") + (doppio ? " doppio" : ""));
+      if (grp && grp !== sez || doppio){
+        const h = el("div", "grp-h"); h.append(el("h3", null, grp === sez ? "" : grp));
+        if (doppio){ const cols = el("span", "cols"); CONFIG.ETICHETTE_DOPPIO_PREZZO.forEach(t => cols.append(el("span", null, t))); h.append(cols); }
+        g.append(h);
+      }
+      const ul = el("ul", "voci");
+      for (const v of voci){
+        const li = el("li", "v" + (doppio && v.ps == null ? " unico" : ""));
+        if (v.foto){ const im = el("img", "foto"); im.src = imgSrc(v.foto); im.alt = ""; im.loading = "lazy"; im.onerror = () => im.remove(); li.append(im); }
+        const corpo = el("div", "corpo"), riga = el("div", "riga");
+        riga.append(el("span", "nm", v.voce), el("span", "pt"));
+        const pr = el("span", "pr");
+        pr.append(el("span", null, v.p != null ? eur.format(v.p) : ""));
+        if (doppio && v.ps != null) pr.append(el("span", null, eur.format(v.ps)));
+        riga.append(pr); corpo.append(riga);
+        if (v.desc) corpo.append(el("span", "ds", v.desc));
+        li.append(corpo); ul.append(li);
+      }
+      g.append(ul); s.append(g);
+    }
+    main.append(s);
+  }
+  osserva();
+}
+
+let obs;
+function osserva(){
+  if (obs) obs.disconnect();
+  obs = new IntersectionObserver(es => {
+    for (const e of es) if (e.isIntersecting){
+      document.querySelectorAll(".chip").forEach(c => {
+        const on = c.dataset.target === e.target.id;
+        c.setAttribute("aria-current", on ? "true" : "false");
+        if (on) c.scrollIntoView({block: "nearest", inline: "center"});
+      });
+    }
+  }, {rootMargin: "-130px 0px -65% 0px"});
+  document.querySelectorAll("section.pagina").forEach(s => obs.observe(s));
+}
+
+function errore(){
+  const main = document.getElementById("menu"); main.textContent = "";
+  const d = el("div", "state", "Non riesco a caricare il menu in questo momento.");
+  const b = el("button", null, "Riprova"); b.type = "button"; b.onclick = avvio;
+  d.append(el("br"), b); main.append(d);
+}
+
+async function avvio(){
+  try { DATA = await carica(); render(document.getElementById("q").value); }
+  catch (e) { errore(); console.error(e); }
+}
+let t; document.getElementById("q").addEventListener("input", e => { clearTimeout(t); t = setTimeout(() => render(e.target.value), 120); });
+avvio();
+</script>
+
+</body>
+</html>
